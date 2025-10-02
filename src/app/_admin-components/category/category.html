@@ -1,3 +1,22 @@
-<ul *ngFor="let item of categories">
-  <li>{{item.categoryName}}</li>
-</ul>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Category Name</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+<tbody>
+  <tr *ngFor="let item of categories; let i = index;">
+    <th>{{i+1}}</th>
+    <th>{{item.categoryName}}</th>
+    <td style="display: flex; gap: 10px;">
+      <button class="btn btn-outline-danger">Remove</button>
+      <button class="btn btn-outline-info">Update</button>
+    </td>
+  </tr>
+
+</tbody>
+</table>
+<button class="btn btn-outline-primary">Add new</button>
