@@ -8,6 +8,7 @@ import { MainLayout } from './_layouts/main-layout/main-layout';
 import { Home } from './_main-components/home/home';
 import { Category } from './_admin-components/category/category';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

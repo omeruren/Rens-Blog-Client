@@ -16,7 +16,7 @@ export class CategoryService {
     return this.http.get<Result<CategoryDto[]>>(this.baseUrl);
   }
 
-  create(catgoryDto:CategoryDto){
-    return this.http.post<Result<CategoryDto>>(this.baseUrl,catgoryDto);
+  create(categoryDto:CategoryDto){
+    return this.http.post<Result<CategoryDto>>(this.baseUrl,categoryDto);
   }
 }

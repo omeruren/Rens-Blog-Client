@@ -17,6 +17,7 @@ this.getCategories();
 }
 
 categories: CategoryDto[];
+newCategory : CategoryDto = new CategoryDto();
 
 getCategories(){
   this.categoryService.getCategories().subscribe(
@@ -26,4 +27,11 @@ getCategories(){
     }
   )
 }
+  createCategory(){
+this.categoryService.create(this.newCategory).subscribe({
+  next: result => this.categories.push(result.data),
+  error: result => console.log(result)
+})
+  }
+
 }
