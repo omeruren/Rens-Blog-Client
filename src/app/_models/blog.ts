@@ -1,5 +1,10 @@
 export class Blog {
-  id: number;
-  title: string;
-  description: string;
+  id;
+  title;
+  coverImage;
+  blogImage;
+  description;
+  categoryId;
+  userId;
 }
+
