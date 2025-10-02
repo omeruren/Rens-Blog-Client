@@ -1,6 +1,6 @@
 import { Blog } from "./blog";
 
-export class Category{
+export class CategoryDto{
 id;
 categoryName;
 blogs:Blog[];

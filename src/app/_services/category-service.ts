@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Result } from '../_models/result';
-import { Category } from '../_models/category';
+import { CategoryDto } from '../_models/category';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +13,6 @@ export class CategoryService {
    */
   constructor(private http: HttpClient) {}
   getCategories() {
-    return this.http.get<Result<Category[]>>(this.baseUrl);
+    return this.http.get<Result<CategoryDto[]>>(this.baseUrl);
   }
 }
