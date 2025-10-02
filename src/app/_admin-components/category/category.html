@@ -1,4 +1,3 @@
-
 <table class="table table-bordered table-hover">
   <thead>
     <tr>
@@ -7,16 +6,47 @@
       <th>Options</th>
     </tr>
   </thead>
-<tbody>
-  <tr *ngFor="let item of categories; let i = index;">
-    <th>{{i+1}}</th>
-    <th>{{item.categoryName}}</th>
-    <td style="display: flex; gap: 10px;">
-      <button class="btn btn-outline-danger">Remove</button>
-      <button class="btn btn-outline-info">Update</button>
-    </td>
-  </tr>
-
-</tbody>
+  <tbody>
+    <tr *ngFor="let item of categories; let i = index">
+      <th>{{ i + 1 }}</th>
+      <th>{{ item.categoryName }}</th>
+      <td style="display: flex; gap: 10px">
+        <button class="btn btn-outline-danger">Remove</button>
+        <button class="btn btn-outline-info">Update</button>
+      </td>
+    </tr>
+  </tbody>
 </table>
-<button class="btn btn-outline-primary">Add new</button>
+<button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+  Add new
+</button>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="createModal"
+  tabindex="-1"
+  aria-labelledby="createModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="createModalLabel">Add new Category</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="">
+          <div class="form-group">
+            <label for="">Category Name</label>
+            <input type="text" class="form-control" placeholder="Write Category Name" name="categoryName" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
