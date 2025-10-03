@@ -12,7 +12,7 @@
       <th>{{ item.categoryName }}</th>
       <td style="display: flex; gap: 10px">
         <button class="btn btn-outline-danger" (click)="delete(item.id)">Remove</button>
-        <button class="btn btn-outline-info">Update</button>
+        <button class="btn btn-outline-info"  data-bs-toggle="modal" data-bs-target="#updateModal" (click)="onSelected(item)">Update</button>
       </td>
     </tr>
   </tbody>
@@ -21,7 +21,7 @@
   Add new
 </button>
 
-<!-- Modal -->
+<!-- Create Modal -->
 <div
   class="modal fade"
   id="createModal"
@@ -73,5 +73,59 @@
     </form>
   </div>
 </div>
-<!-- Modal -->
+<!--Create Modal -->
+
+<!-- Update Modal -->
+<div
+  class="modal fade"
+  id="updateModal"
+  tabindex="-1"
+  aria-labelledby="updateModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <form #updateForm="ngForm" (ngSubmit)="update(); ">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="updateModalLabel">Update Category</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="">Category Name</label>
+            <input
+              required=""
+              type="text"
+              class="form-control"
+              placeholder="Write Category Name"
+              name="categoryName"
+              [(ngModel)]="editCategory.categoryName"
+            />
+            <div  *ngIf="errors[0]?.propertyName === 'CategoryName'">
+              <span class="text-danger" *ngFor="let error of errors">{{ error.errorMessage }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button
+            type="button"
+            [disabled]="updateForm.invalid || !updateForm.dirty"
+            type="submit"
+            class="btn btn-primary"
+
+          >
+            Save changes
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!--Update Modal -->
 

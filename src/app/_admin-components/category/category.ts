@@ -21,6 +21,7 @@ export class Category {
 
   categories: CategoryDto[];
   newCategory: CategoryDto = new CategoryDto();
+  editCategory: any = {};
   errors: any = [];
   getCategories() {
     this.categoryService.getCategories().subscribe({
@@ -63,5 +64,28 @@ export class Category {
     } else {
       console.log('Operation cancelled.');
     }
+  }
+  update() {
+    this.categoryService.update(this.editCategory).subscribe({
+      error: (result) => {
+        alertify.error('An error occurred while updating the category.');
+        if (result.status === 400) {
+          console.log(result.error);
+          this.errors = result.error.errors;
+        }
+      },
+      complete: () => {
+        alertify.success('Category updated successfully');
+
+        setTimeout(() => {
+          location.reload();
+        }, 1000);
+     }
+      ,
+    });
+  }
+
+  onSelected(model) {
+    this.editCategory = model;
   }
 }

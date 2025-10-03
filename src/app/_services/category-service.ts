@@ -23,6 +23,11 @@ export class CategoryService {
   delete(id:string){
     return this.http.delete(this.baseUrl+id);
   }
+  update(caegoryDto:CategoryDto){
+    return this.http.put(this.baseUrl,caegoryDto);
+  }
 }
+
+
 
 
