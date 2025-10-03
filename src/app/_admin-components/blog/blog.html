@@ -1,1 +1,40 @@
-<p>blog works!</p>
+<h3>Blogs</h3>
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <td>#</td>
+      <td>Cover Image</td>
+      <td>Title</td>
+      <td>Description</td>
+      <td>Category Name</td>
+      <td>Create Date</td>
+      <td>Last Update Date</td>
+      <td>Options</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let blog of blogs; let i = index">
+      <td>{{ i + 1 }}</td>
+      <td><img src="{{ blog.coverImage }}" class="img-thumbnail" /></td>
+      <td>{{ blog.title }}</td>
+      <td>{{ blog.description }}</td>
+      <td>{{ blog.category.categoryName }}</td>
+      <td>{{ blog.createdAt | date }}</td> <!--  Date Pipe -->
+      <td>
+  {{ blog.updatedAt && blog.updatedAt !== '0001-01-01T00:00:00'
+      ? (blog.updatedAt | date:'medium')
+      : 'Not updated yet' }}
+</td>
+      <td style="display: flex; gap: 10px">
+        <button class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
+        <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#updateModal">
+          <i class="fa fa-edit"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+  <i class="fa fa-plus"></i> Add new
+</button>

@@ -15,7 +15,7 @@ export class Category {
   /**
    *
    */
-  constructor(private categoryService: CategoryService, private swal: SweetalertService) {
+  constructor(private categoryService: CategoryService, private swal:SweetalertService ) {
     this.getCategories();
   }
 

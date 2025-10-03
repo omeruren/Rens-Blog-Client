@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { SweetalertService } from './sweetalert-service';
 import { BlogDto } from '../_models/blog';
 import { Result } from '../_models/result';
 
@@ -13,10 +12,10 @@ export class BlogService {
   /**
    *
    */
-  constructor(private http: HttpClient, private swal: SweetalertService) {}
+  constructor(private http: HttpClient) {}
 
   getAll() {
-    return this.http.get(this.baseUrl);
+    return this.http.get<Result<BlogDto[]>>(this.baseUrl);
   }
 
   create(blogDto: BlogDto) {

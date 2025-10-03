@@ -1,7 +1,7 @@
-import { Blog } from "./blog";
+import { BlogDto } from "./blog";
 
 export class CategoryDto{
 id;
 categoryName;
-blogs:Blog[];
+blogs:BlogDto[];
 }
