@@ -30,7 +30,7 @@
   aria-hidden="true"
 >
   <div class="modal-dialog modal-dialog-centered">
-    <form #createForm="ngForm" (ngSubmit)="createCategory()">
+    <form #createForm="ngForm" (ngSubmit)="createCategory(); createForm.resetForm() ">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title fs-5" id="createModalLabel">Add new Category</h1>
@@ -52,16 +52,19 @@
               name="categoryName"
               [(ngModel)]="newCategory.categoryName"
             />
+            <div  *ngIf="errors[0]?.propertyName === 'CategoryName'">
+              <span class="text-danger" *ngFor="let error of errors">{{ error.errorMessage }}</span>
+            </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary">Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button
             type="button"
             [disabled]="createForm.invalid"
             type="submit"
             class="btn btn-primary"
-            data-bs-dismiss="modal"
+
           >
             Save changes
           </button>

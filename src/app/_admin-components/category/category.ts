@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CategoryService } from '../../_services/category-service';
 import { CategoryDto } from '../../_models/category';
 declare const alertify: any;
+declare const bootstrap: any;
 
 @Component({
   selector: 'admin-category',
@@ -19,7 +20,7 @@ export class Category {
 
   categories: CategoryDto[];
   newCategory: CategoryDto = new CategoryDto();
-
+  errors: any = [];
   getCategories() {
     this.categoryService.getCategories().subscribe({
       next: (result) => (this.categories = result.data),
@@ -27,10 +28,21 @@ export class Category {
     });
   }
   createCategory() {
-    this.categoryService.create(this.newCategory).subscribe({
-      next: (result) => this.categories.push(result.data),
-      error: (result) => alertify.error(result.error.errors[0].errorMessage),
-      complete: () => alertify.success('Category created successfully'),
-    });
-  }
+  this.categoryService.create(this.newCategory).subscribe({
+    next: (result) => {
+      this.categories.push(result.data);
+      alertify.success('Category created successfully');
+      // Close the  Modal
+      const modal = document.getElementById('createModal');
+      const modalInstance = bootstrap.Modal.getInstance(modal);
+      modalInstance?.hide();
+    },
+    error: (result) => {
+      alertify.error('An error occurred while creating the category.');
+      if (result.status === 400) {
+        this.errors = result.error.errors;
+      }
+    }
+  });
+}
 }
