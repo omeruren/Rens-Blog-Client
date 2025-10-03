@@ -11,14 +11,14 @@
       <th>{{ i + 1 }}</th>
       <th>{{ item.categoryName }}</th>
       <td style="display: flex; gap: 10px">
-        <button class="btn btn-outline-danger" (click)="delete(item.id)">Remove</button>
-        <button class="btn btn-outline-info"  data-bs-toggle="modal" data-bs-target="#updateModal" (click)="onSelected(item)">Update</button>
+        <button class="btn btn-outline-danger" (click)="delete(item.id)"><i class="fa fa-trash"></i></button>
+        <button class="btn btn-outline-info"  data-bs-toggle="modal" data-bs-target="#updateModal" (click)="onSelected(item)"><i class="fa fa-edit"></i></button>
       </td>
     </tr>
   </tbody>
 </table>
 <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createModal">
-  Add new
+  <i class="fa fa-plus"></i> Add new
 </button>
 
 <!-- Create Modal -->
@@ -58,7 +58,8 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i>
+            Close</button>
           <button
             type="button"
             [disabled]="createForm.invalid"
@@ -66,7 +67,7 @@
             class="btn btn-primary"
 
           >
-            Save changes
+            <i class="fa fa-save"></i> Save changes
           </button>
         </div>
       </div>
@@ -112,7 +113,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fa fa-times"></i> Close</button>
           <button
             type="button"
             [disabled]="updateForm.invalid || !updateForm.dirty"
@@ -120,7 +121,7 @@
             class="btn btn-primary"
 
           >
-            Save changes
+         <i class="fa fa-save"></i>   Save changes
           </button>
         </div>
       </div>

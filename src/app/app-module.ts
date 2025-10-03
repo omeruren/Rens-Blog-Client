@@ -9,6 +9,7 @@ import { Home } from './_main-components/home/home';
 import { Category } from './_admin-components/category/category';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { Blog } from './_admin-components/blog/blog';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FormsModule } from '@angular/forms';
     AdminLayout,
     MainLayout,
     Home,
-    Category
+    Category,
+    Blog
   ],
   imports: [
     BrowserModule,

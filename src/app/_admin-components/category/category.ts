@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CategoryService } from '../../_services/category-service';
 import { CategoryDto } from '../../_models/category';
-import { Sweetalert } from '../../_services/sweetalert';
+import { SweetalertService } from '../../_services/sweetalert-service';
 declare const alertify: any;
 declare const bootstrap: any;
 
@@ -15,7 +15,7 @@ export class Category {
   /**
    *
    */
-  constructor(private categoryService: CategoryService, private swal: Sweetalert) {
+  constructor(private categoryService: CategoryService, private swal: SweetalertService) {
     this.getCategories();
   }
 
