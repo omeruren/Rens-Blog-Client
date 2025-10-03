@@ -7,7 +7,7 @@ import { CategoryDto } from '../_models/category';
   providedIn: 'root',
 })
 export class CategoryService {
-  baseUrl = 'https://localhost:7000/api/categories';
+  baseUrl = 'https://localhost:7000/api/categories/';
   /**
    *
    */
@@ -19,4 +19,10 @@ export class CategoryService {
   create(categoryDto:CategoryDto){
     return this.http.post<Result<CategoryDto>>(this.baseUrl,categoryDto);
   }
+
+  delete(id:string){
+    return this.http.delete(this.baseUrl+id);
+  }
 }
+
+

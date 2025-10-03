@@ -45,4 +45,16 @@ export class Category {
     }
   });
 }
+  delete(id){
+    this.categoryService.delete(id).subscribe({
+      error :result=> {
+        console.log(result.error);
+        alertify.error("An error occurred while deleting the category.")
+      },
+      complete:()=>{
+        alertify.success("Category deleted successfully.");
+        this.getCategories();
+      }
+    });
+  }
 }
