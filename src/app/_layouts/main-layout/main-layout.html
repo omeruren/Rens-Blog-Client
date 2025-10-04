@@ -52,7 +52,7 @@
       </ul>
 
       <!-- 🔹 Profil fotoğraflı dropdown -->
-      <div class="dropdown">
+      <div class="dropdown" *ngIf="isLoggedIn()">
         <a
           class="d-flex align-items-center text-decoration-none dropdown-toggle"
           href="#"
