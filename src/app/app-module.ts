@@ -10,6 +10,7 @@ import { Category } from './_admin-components/category/category';
 import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Blog } from './_admin-components/blog/blog';
+import { Login } from './_main-components/login/login';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { Blog } from './_admin-components/blog/blog';
     MainLayout,
     Home,
     Category,
-    Blog
+    Blog,
+    Login
   ],
   imports: [
     BrowserModule,
