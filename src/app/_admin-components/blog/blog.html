@@ -16,7 +16,7 @@
   <tbody>
     <tr *ngFor="let blog of blogs; let i = index">
       <td>{{ i + 1 }}</td>
-      <td><img src="{{ blog.coverImage }}" style="width: 100px; height: auto;" /></td>
+      <td><img src="{{ blog.coverImage }}" style="width: 100px; height: auto" /></td>
       <td>{{ blog.title }}</td>
       <td>{{ blog.description }}</td>
       <td>{{ blog.category.categoryName }}</td>
@@ -31,7 +31,12 @@
       </td>
       <td style="display: flex; gap: 10px">
         <button class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
-        <button class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#updateModal">
+        <button
+          class="btn btn-outline-info"
+          data-bs-toggle="modal"
+          data-bs-target="#editModal"
+          (click)="onSelected(blog)"
+        >
           <i class="fa fa-edit"></i>
         </button>
       </td>
@@ -54,7 +59,7 @@
     <form #createForm="ngForm" (ngSubmit)="createBlog(); createForm.resetForm()">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="createModalLabel">Add new Category</h1>
+          <h1 class="modal-title fs-5" id="createModalLabel">Add new Blog</h1>
           <button
             type="button"
             class="btn-close"
@@ -183,12 +188,7 @@
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             <i class="fa fa-times"></i> Close
           </button>
-          <button
-            type="button"
-
-            type="submit"
-            class="btn btn-primary"
-          >
+          <button type="button" type="submit" class="btn btn-primary">
             <i class="fa fa-save"></i> Save changes
           </button>
         </div>
@@ -197,3 +197,158 @@
   </div>
 </div>
 <!--Create Modal -->
+
+
+
+<!--Update Modal -->
+<div
+  class="modal fade"
+  id="editModal"
+  tabindex="-1"
+  aria-labelledby="editModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <form #editForm="ngForm" (ngSubmit)="update();">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="editModalLabel">Add new Blog</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="">Blog Title</label>
+            <input
+              required=""
+              type="text"
+              class="form-control"
+              placeholder="Write Title"
+              name="title"
+              [(ngModel)]="editBlog.title"
+            />
+            <div *ngIf="errors.length > 0">
+              <div *ngFor="let errorObj of errors">
+                <div *ngFor="let entry of errorObj | keyvalue">
+                  <div *ngIf="entry.key === 'Title'">
+                    <span class="text-danger">{{ entry.value }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">Cover Image</label>
+            <input
+              required=""
+              type="text"
+              class="form-control"
+              placeholder="Write Cover Image"
+              name="coverImage"
+              [(ngModel)]="editBlog.coverImage"
+            />
+            <div *ngIf="errors.length > 0">
+              <div *ngFor="let errorObj of errors">
+                <div *ngFor="let entry of errorObj | keyvalue">
+                  <div *ngIf="entry.key === 'CoverImage'">
+                    <span class="text-danger">{{ entry.value }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">Blog Image</label>
+            <input
+              required=""
+              type="text"
+              class="form-control"
+              placeholder="Write Blog Image"
+              name="blogImage"
+              [(ngModel)]="editBlog.blogImage"
+            />
+            <div *ngIf="errors.length > 0">
+              <div *ngFor="let errorObj of errors">
+                <div *ngFor="let entry of errorObj | keyvalue">
+                  <div *ngIf="entry.key === 'BlogImage'">
+                    <span class="text-danger">{{ entry.value }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">Description</label>
+            <textarea
+              required=""
+              type="text"
+              class="form-control"
+              placeholder="Write Description"
+              name="description"
+              [(ngModel)]="editBlog.description"
+            ></textarea>
+
+            <div *ngIf="errors.length > 0">
+              <div *ngFor="let errorObj of errors">
+                <div *ngFor="let entry of errorObj | keyvalue">
+                  <div *ngIf="entry.key === 'Description'">
+                    <span class="text-danger">{{ entry.value }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">User Id</label>
+            <input
+              required=""
+              type="text"
+              class="form-control"
+              placeholder="Write Description"
+              name="userId"
+              [(ngModel)]="editBlog.userId"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="">Category Name</label>
+            <select
+              name="categoryId"
+              class="form-control"
+              [(ngModel)]="editBlog.categoryId"
+              required=""
+            >
+              <option *ngFor="let category of categories" value="{{ category.id }}">
+                {{ category.categoryName }}
+              </option>
+            </select>
+            <div *ngIf="errors.length > 0">
+              <div *ngFor="let errorObj of errors">
+                <div *ngFor="let entry of errorObj | keyvalue">
+                  <div *ngIf="entry.key === 'CategoryId'">
+                    <span class="text-danger">{{ entry.value }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fa fa-times"></i> Close
+          </button>
+          <button type="button" type="submit" class="btn btn-primary">
+            <i class="fa fa-save"></i> Save changes
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!--Create Modal -->
+
+

@@ -15,8 +15,9 @@ declare const alertify: any;
 export class Blog implements OnInit {
   blogs: BlogDto[];
   categories: CategoryDto[];
+  editBlog: any = {};
   newBlog: BlogDto = new BlogDto();
-  errors: any = [];
+  errors: any = {};
   /**
    *
    */
@@ -41,7 +42,7 @@ export class Blog implements OnInit {
   }
 
   createBlog() {
-    this.errors = {};
+ this.errors={};
     this.blogService.create(this.newBlog).subscribe({
       next: (result) => this.blogs.push(result.data),
       error: (result) => {
@@ -54,12 +55,37 @@ export class Blog implements OnInit {
         setTimeout(() => {
           location.reload();
         }, 1000);
+        this.errors={};
       },
     });
   }
   getCategories() {
     this.categoryService.getCategories().subscribe({
       next: (result) => (this.categories = result.data),
+    });
+  }
+
+  onSelected(blog) {
+     this.errors={};
+    this.editBlog = blog;
+  }
+
+  update() {
+     this.errors={};
+    this.blogService.update(this.editBlog).subscribe({
+      error: (result) => {
+        console.log(result.error);
+        alertify.error('An error Occured!');
+        this.errors = result.error.errors;
+
+      },
+      complete: () => {
+        alertify.success('Blog updated');
+        setTimeout(() => {
+          location.reload();
+        }, 1000);
+         this.errors={};
+      },
     });
   }
 }
