@@ -88,4 +88,23 @@ export class Blog implements OnInit {
       },
     });
   }
+
+   async delete(id) {
+    const isConfirmed = await this.swal.areYouSure();
+
+    if (isConfirmed) {
+      this.blogService.delete(id).subscribe({
+        error: (result) => {
+          console.log(result.error);
+          alertify.error('An error occurred while deleting the Blog.');
+        },
+        complete: () => {
+          alertify.success('Blog deleted successfully.');
+          this.getBlogs();
+        },
+      });
+    } else {
+      console.log('Operation cancelled.');
+    }
+  }
 }
