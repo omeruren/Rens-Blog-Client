@@ -6,6 +6,7 @@ export class BlogDto {
   coverImage;
   blogImage;
   description;
+  categoryId;
   category: CategoryDto;
   userId;
   createdAt;

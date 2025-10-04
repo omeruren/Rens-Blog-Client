@@ -29,7 +29,7 @@
   aria-labelledby="createModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog ">
     <form #createForm="ngForm" (ngSubmit)="createCategory(); createForm.resetForm() ">
       <div class="modal-content">
         <div class="modal-header">
@@ -52,8 +52,15 @@
               name="categoryName"
               [(ngModel)]="newCategory.categoryName"
             />
-            <div  *ngIf="errors[0]?.propertyName === 'CategoryName'">
-              <span class="text-danger" *ngFor="let error of errors">{{ error.errorMessage }}</span>
+            <div  *ngIf="errors.length>0">
+
+              <div *ngFor="let errorObj of errors">
+                <div *ngFor="let entry of (errorObj | keyvalue)">
+                  <div *ngIf="entry.key === 'CategoryName'">
+                    <span class="text-danger">{{entry.value}}</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -84,7 +91,7 @@
   aria-labelledby="updateModalLabel"
   aria-hidden="true"
 >
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog ">
     <form #updateForm="ngForm" (ngSubmit)="update(); ">
       <div class="modal-content">
         <div class="modal-header">
@@ -107,8 +114,15 @@
               name="categoryName"
               [(ngModel)]="editCategory.categoryName"
             />
-            <div  *ngIf="errors[0]?.propertyName === 'CategoryName'">
-              <span class="text-danger" *ngFor="let error of errors">{{ error.errorMessage }}</span>
+          <div  *ngIf="errors.length>0">
+
+              <div *ngFor="let errorObj of errors">
+                <div *ngFor="let entry of (errorObj | keyvalue)">
+                  <div *ngIf="entry.key === 'CategoryName'">
+                    <span class="text-danger">{{entry.value}}</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
