@@ -11,7 +11,8 @@ declare const alertify: any;
 export class Login {
   token: any;
   loginDto: loginDto = new loginDto();
-  errors:any={}
+  errors: any = {};
+  decodedToken:any;
   /**
    *
    */
@@ -22,11 +23,19 @@ export class Login {
       next: (result) => {
         this.token = result.data.token;
         alertify.success('Login Successfull');
+        localStorage.setItem('token', result.data.token);
+        this.decodeToken()
+        console.log(this.decodedToken)
       },
       error: (result) => {
         console.log(result.error.errors);
         alertify.error('login failed');
       },
     });
+  }
+
+  decodeToken() {
+  this.decodedToken = this.autService.decodeToken();
+
   }
 }
