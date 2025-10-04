@@ -55,12 +55,21 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/alertifyjs/build/css/alertify.min.css",
               "node_modules/sweetalert2/dist/sweetalert2.min.css",
-              "node_modules/font-awesome/css/font-awesome.min.css"
+              "node_modules/font-awesome/css/font-awesome.min.css",
+              "node_modules/swiper/swiper-bundle.min.css",
+              "src/assets/vendor/aos/aos.css",
+              "src/assets/vendor/swiper/swiper-bundle.min.css",
+              "src/assets/css/main.css",
+              "src/styles.css"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
               "node_modules/alertifyjs/build/alertify.min.js",
-              "node_modules/sweetalert2/dist/sweetalert2.min.js"
+              "node_modules/sweetalert2/dist/sweetalert2.min.js",
+                "src/assets/vendor/aos/aos.js",
+              "src/assets/vendor/swiper/swiper-bundle.min.js",
+              "src/assets/js/main.js"
+
             ]
           },
           "configurations": {
@@ -68,13 +77,13 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "1MB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "2MB",
+                  "maximumError": "2MB"
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "4kB",
-                  "maximumError": "8kB"
+                  "maximumWarning": "2MB",
+                  "maximumError": "2MB"
                 }
               ],
               "outputHashing": "all"

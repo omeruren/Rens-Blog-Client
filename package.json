@@ -35,7 +35,10 @@
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.23.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.15.0"
+    "zone.js": "~0.15.0",
+      "@popperjs/core": "^2.11.8",
+    "aos": "^2.3.4",
+    "swiper": "^11.2.6"
   },
   "devDependencies": {
     "@angular/build": "^20.3.3",
@@ -49,5 +52,6 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.9.2"
+
   }
 }
