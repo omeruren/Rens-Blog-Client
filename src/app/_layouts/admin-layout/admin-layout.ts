@@ -21,4 +21,8 @@ export class AdminLayout {
     let token= this.authService.decodeToken();
     return token.name;
   }
+
+  logout(){
+    this.authService.logout();
+  }
 }
