@@ -9,6 +9,7 @@ import { Login } from './_main-components/login/login';
 import { AuthGuard } from './_guards/auth-guard';
 import { BlogDetails } from './_main-components/blog-details/blog-details';
 import { ContactMain } from './_main-components/contact-main/contact-main';
+import { Comment } from './_admin-components/comment/comment';
 
 const routes: Routes = [
   //Main Routes
@@ -50,6 +51,11 @@ const routes: Routes = [
       {
         path: 'blog',
         component: Blog,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'comment',
+        component: Comment,
         canActivate: [AuthGuard],
       },
     ],
