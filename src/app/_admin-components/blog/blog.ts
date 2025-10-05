@@ -5,6 +5,7 @@ import { BlogService } from './../../_services/blog-service';
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../../_services/category-service';
 import { CategoryDto } from '../../_models/category';
+import { AuthService } from '../../_services/auth-service';
 declare const alertify: any;
 @Component({
   selector: 'app-blog',
@@ -24,7 +25,8 @@ export class Blog implements OnInit {
   constructor(
     private blogService: BlogService,
     private swal: SweetalertService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private authService: AuthService
   ) {}
   ngOnInit(): void {
     this.getBlogs();
@@ -42,7 +44,10 @@ export class Blog implements OnInit {
   }
 
   createBlog() {
- this.errors={};
+    this.errors = {};
+    let decodedToken = this.authService.decodeToken();
+    this.newBlog.userId = decodedToken.sub;
+
     this.blogService.create(this.newBlog).subscribe({
       next: (result) => this.blogs.push(result.data),
       error: (result) => {
@@ -55,7 +60,7 @@ export class Blog implements OnInit {
         setTimeout(() => {
           location.reload();
         }, 1000);
-        this.errors={};
+        this.errors = {};
       },
     });
   }
@@ -66,30 +71,32 @@ export class Blog implements OnInit {
   }
 
   onSelected(blog) {
-     this.errors={};
+    this.errors = {};
     this.editBlog = blog;
   }
 
   update() {
-     this.errors={};
+    this.errors = {};
+    let decodedToken = this.authService.decodeToken();
+    this.editBlog.userId = decodedToken.sub;
+
     this.blogService.update(this.editBlog).subscribe({
       error: (result) => {
         console.log(result.error);
         alertify.error('An error Occured!');
         this.errors = result.error.errors;
-
       },
       complete: () => {
         alertify.success('Blog updated');
         setTimeout(() => {
           location.reload();
         }, 1000);
-         this.errors={};
+        this.errors = {};
       },
     });
   }
 
-   async delete(id) {
+  async delete(id) {
     const isConfirmed = await this.swal.areYouSure();
 
     if (isConfirmed) {

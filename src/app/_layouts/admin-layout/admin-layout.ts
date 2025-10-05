@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../_services/auth-service';
-
+declare const alertify:any;
 @Component({
   selector: 'admin-layout',
   standalone: false,
@@ -24,5 +24,6 @@ export class AdminLayout {
 
   logout(){
     this.authService.logout();
+    alertify.success("Logged Out")
   }
 }
