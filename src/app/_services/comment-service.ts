@@ -13,11 +13,19 @@ export class CommentService {
    */
   constructor(private http: HttpClient) {}
 
+  getAll() {
+    return this.http.get<Result<CommentDto[]>>(this.baseUrl);
+  }
   create(commentDto: CommentDto) {
     return this.http.post<Result<CommentDto>>(this.baseUrl, commentDto);
   }
-
-  getAll() {
-    return this.http.get<Result<CommentDto[]>>(this.baseUrl);
+  update(commentDto: CommentDto) {
+    return this.http.put(this.baseUrl, commentDto);
+  }
+  delete(id: string) {
+    return this.http.delete(this.baseUrl + id);
+  }
+  getById(id: string) {
+    return this.http.get<Result<CommentDto>>(this.baseUrl + id);
   }
 }
