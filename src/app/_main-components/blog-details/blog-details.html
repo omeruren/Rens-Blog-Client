@@ -63,7 +63,7 @@
       <!-- Blog Comments Section -->
       <section id="blog-comments" class="blog-comments section">
         <div class="container">
-          <h4 class="comments-count">8 Comments</h4>
+          <h4 class="comments-count">{{blog.comments.length}} Comments</h4>
           @for (item of blog.comments; track $index) {
 
           <div id="comment-1" class="comment">
@@ -71,7 +71,7 @@
               <div class="comment-img"><img src="assets/img/blog/comments-1.jpg" alt="" /></div>
               <div>
                 <h5>
-                  <a href="">{{ item.user?.firstName }} {{ item.user?.lastName }}</a>
+                  <a href="">{{ item.firstName }} {{ item.lastName }}</a>
                   <a href="#" class="reply"><i class="bi bi-reply-fill"></i> Reply</a>
                 </h5>
                 <time datetime="2020-01-01">{{ item.commentDate | date }}</time>
@@ -86,43 +86,10 @@
         </div>
       </section>
       <!-- /Blog Comments Section -->
+<!-- Comment Form Section -->
+ <comment-form></comment-form>
+<!-- Comment Form Section -->
 
-      <!-- Comment Form Section -->
-      <section id="comment-form" class="comment-form section">
-        <div class="container">
-          <form action="">
-            <h4>Post Comment</h4>
-            <p>Your email address will not be published. Required fields are marked *</p>
-            <div class="row">
-              <div class="col-md-6 form-group">
-                <input name="name" type="text" class="form-control" placeholder="Your Name*" />
-              </div>
-              <div class="col-md-6 form-group">
-                <input name="email" type="text" class="form-control" placeholder="Your Email*" />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col form-group">
-                <input name="website" type="text" class="form-control" placeholder="Your Website" />
-              </div>
-            </div>
-            <div class="row">
-              <div class="col form-group">
-                <textarea
-                  name="comment"
-                  class="form-control"
-                  placeholder="Your Comment*"
-                ></textarea>
-              </div>
-            </div>
-
-            <div class="text-center">
-              <button type="submit" class="btn btn-primary">Post Comment</button>
-            </div>
-          </form>
-        </div>
-      </section>
-      <!-- /Comment Form Section -->
     </div>
 
     <div class="col-lg-4 sidebar">
