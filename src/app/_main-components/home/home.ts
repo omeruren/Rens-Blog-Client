@@ -4,6 +4,8 @@ import { BlogDto } from '../../_models/blog';
 import AOS from 'aos';
 import Swiper from 'swiper';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { CategoryService } from '../../_services/category-service';
+import { CategoryDto } from '../../_models/category';
 @Component({
   selector: 'home',
   standalone: false,
@@ -14,12 +16,12 @@ export class Home implements OnInit, AfterViewInit {
   swiper: any;
   isMobileMenuOpen = false;
   latestBlogs: BlogDto[];
-
-  constructor(private blogService: BlogService) {}
+  blogsWithCategories: CategoryDto[];
+  constructor(private blogService: BlogService, private categoryService: CategoryService) {}
 
   ngOnInit() {
     this.getLatest5Blogs();
-
+this.getBlogsWithCategories();
     // Initialize AOS
     AOS.init({
       duration: 1000,
@@ -87,9 +89,14 @@ export class Home implements OnInit, AfterViewInit {
   getLatest5Blogs() {
     this.blogService.getLatest5().subscribe({
       next: (result) => {
-        this.latestBlogs = result.data
-      }
+        this.latestBlogs = result.data;
+      },
+    });
+  }
 
+  getBlogsWithCategories() {
+    this.categoryService.getCategories().subscribe({
+      next: (result) => {this.blogsWithCategories = result.data},
     });
   }
 }

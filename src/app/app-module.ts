@@ -11,6 +11,7 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { FormsModule } from '@angular/forms';
 import { Blog } from './_admin-components/blog/blog';
 import { Login } from './_main-components/login/login';
+import { BlogDetails } from './_main-components/blog-details/blog-details';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { Login } from './_main-components/login/login';
     Home,
     Category,
     Blog,
-    Login
+    Login,
+    BlogDetails
   ],
   imports: [
     BrowserModule,

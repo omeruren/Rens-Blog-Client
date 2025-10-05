@@ -18,8 +18,12 @@ export class BlogService {
     return this.http.get<Result<BlogDto[]>>(this.baseUrl);
   }
 
-  getLatest5(){
-    return this.http.get<Result<BlogDto[]>>(this.baseUrl+"Latest5Blogs")
+  getLatest5() {
+    return this.http.get<Result<BlogDto[]>>(this.baseUrl + 'Latest5Blogs');
+  }
+
+  getById(id: string) {
+    return this.http.get<Result<BlogDto>>(this.baseUrl + id);
   }
 
   create(blogDto: BlogDto) {

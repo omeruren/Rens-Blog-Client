@@ -1,4 +1,6 @@
 import { CategoryDto } from "./category";
+import { CommentDto } from "./commentDto";
+import { UserDto } from "./userDto";
 
 export class BlogDto {
   id;
@@ -9,6 +11,8 @@ export class BlogDto {
   categoryId;
   category: CategoryDto;
   userId;
+  user:UserDto
+  comments:CommentDto[];
   createdAt;
   updatedAt;
 }

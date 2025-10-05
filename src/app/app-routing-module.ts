@@ -7,6 +7,7 @@ import { Category } from './_admin-components/category/category';
 import { Blog } from './_admin-components/blog/blog';
 import { Login } from './_main-components/login/login';
 import { AuthGuard } from './_guards/auth-guard';
+import { BlogDetails } from './_main-components/blog-details/blog-details';
 
 const routes: Routes = [
   //Main Routes
@@ -23,6 +24,10 @@ const routes: Routes = [
         path: 'login',
         component: Login,
       },
+      {
+        path:'blogdetails/:id',
+        component:BlogDetails
+      }
     ],
   },
 
