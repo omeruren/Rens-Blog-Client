@@ -1,3 +1,5 @@
+import { BlogDto } from "./blog";
+import { SubCommentDto } from "./subcommentDto";
 
 export class CommentDto{
   firstName;
@@ -5,5 +7,7 @@ export class CommentDto{
   email;
   body;
   blogId;
+  blog:BlogDto
   commentDate;
+  subcomments:SubCommentDto[];
 }
