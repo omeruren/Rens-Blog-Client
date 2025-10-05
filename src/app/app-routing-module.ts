@@ -8,6 +8,7 @@ import { Blog } from './_admin-components/blog/blog';
 import { Login } from './_main-components/login/login';
 import { AuthGuard } from './_guards/auth-guard';
 import { BlogDetails } from './_main-components/blog-details/blog-details';
+import { ContactMain } from './_main-components/contact-main/contact-main';
 
 const routes: Routes = [
   //Main Routes
@@ -25,9 +26,13 @@ const routes: Routes = [
         component: Login,
       },
       {
-        path:'blogdetails/:id',
-        component:BlogDetails
-      }
+        path: 'blogdetails/:id',
+        component: BlogDetails,
+      },
+      {
+        path: 'contact',
+        component: ContactMain,
+      },
     ],
   },
 
