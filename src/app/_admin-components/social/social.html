@@ -1,0 +1,234 @@
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Link</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of socials; let i = index">
+      <th>{{ i + 1 }}</th>
+      <th><a class="btn btn-outline-primary" href="{{item.url}}" target="_blank"><i class="{{ item.icon }}"></i> {{item.title}}</a></th>
+
+      <td style="display: flex; gap: 10px">
+        <button class="btn btn-outline-danger" (click)="delete(item.id)">
+          <i class="fa fa-trash"></i>
+        </button>
+        <button
+          class="btn btn-outline-info"
+          data-bs-toggle="modal"
+          data-bs-target="#updateModal"
+          (click)="onSelected(item)"
+        >
+          <i class="fa fa-edit"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+  <i class="fa fa-plus"></i> Add new
+</button>
+
+<!-- Create Modal -->
+<div
+  class="modal fade"
+  id="createModal"
+  tabindex="-1"
+  aria-labelledby="createModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <form #createForm="ngForm" (ngSubmit)="create(); createForm.resetForm()">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="createModalLabel">Add new Social</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="">Icon</label>
+            <input
+              required=""
+              type="text"
+              class="form-control"
+              placeholder="Write Icon"
+              name="icon"
+              [(ngModel)]="newSocial.icon"
+            />
+            <div *ngIf="errors.length > 0">
+              <div *ngFor="let errorObj of errors">
+                <div *ngFor="let entry of errorObj | keyvalue">
+                  <div *ngIf="entry.key === 'Icon'">
+                    <span class="text-danger">{{ entry.value }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">Title</label>
+            <input
+              required=""
+              type="text"
+              class="form-control"
+              placeholder="Write Title"
+              name="title"
+              [(ngModel)]="newSocial.title"
+            />
+            <div *ngIf="errors.length > 0">
+              <div *ngFor="let errorObj of errors">
+                <div *ngFor="let entry of errorObj | keyvalue">
+                  <div *ngIf="entry.key === 'Title'">
+                    <span class="text-danger">{{ entry.value }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">Url</label>
+            <input
+              required=""
+              type="text"
+              class="form-control"
+              placeholder="Write Url"
+              name="url"
+              [(ngModel)]="newSocial.url"
+            />
+            <div *ngIf="errors.length > 0">
+              <div *ngFor="let errorObj of errors">
+                <div *ngFor="let entry of errorObj | keyvalue">
+                  <div *ngIf="entry.key === 'Url'">
+                    <span class="text-danger">{{ entry.value }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fa fa-times"></i> Close
+          </button>
+          <button
+            type="button"
+            [disabled]="createForm.invalid"
+            type="submit"
+            class="btn btn-primary"
+          >
+            <i class="fa fa-save"></i> Save changes
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!--Create Modal -->
+
+<!-- Update Modal -->
+<div
+  class="modal fade"
+  id="updateModal"
+  tabindex="-1"
+  aria-labelledby="updateModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <form #updateForm="ngForm" (ngSubmit)="update()">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="updateModalLabel">Update Social</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+           <div class="form-group">
+            <label for="">Icon</label>
+            <input
+              required=""
+              type="text"
+              class="form-control"
+              placeholder="Write Icon"
+              name="icon"
+              [(ngModel)]="editSocial.icon"
+            />
+            <div *ngIf="errors.length > 0">
+              <div *ngFor="let errorObj of errors">
+                <div *ngFor="let entry of errorObj | keyvalue">
+                  <div *ngIf="entry.key === 'Icon'">
+                    <span class="text-danger">{{ entry.value }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">Title</label>
+            <input
+              required=""
+              type="text"
+              class="form-control"
+              placeholder="Write Title"
+              name="title"
+              [(ngModel)]="editSocial.title"
+            />
+            <div *ngIf="errors.length > 0">
+              <div *ngFor="let errorObj of errors">
+                <div *ngFor="let entry of errorObj | keyvalue">
+                  <div *ngIf="entry.key === 'Title'">
+                    <span class="text-danger">{{ entry.value }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="">Url</label>
+            <input
+              required=""
+              type="text"
+              class="form-control"
+              placeholder="Write Url"
+              name="url"
+              [(ngModel)]="editSocial.url"
+            />
+            <div *ngIf="errors.length > 0">
+              <div *ngFor="let errorObj of errors">
+                <div *ngFor="let entry of errorObj | keyvalue">
+                  <div *ngIf="entry.key === 'Url'">
+                    <span class="text-danger">{{ entry.value }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            <i class="fa fa-times"></i> Close
+          </button>
+          <button
+            type="button"
+            [disabled]="updateForm.invalid || !updateForm.dirty"
+            type="submit"
+            class="btn btn-primary"
+          >
+            <i class="fa fa-save"></i> Save changes
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!--Update Modal -->
