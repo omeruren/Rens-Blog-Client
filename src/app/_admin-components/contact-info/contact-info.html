@@ -1,39 +1,30 @@
-<h3>Blogs</h3>
-
 <table class="table table-bordered table-hover">
   <thead>
     <tr>
       <th>#</th>
-      <th>Cover Image</th>
-      <th>Title</th>
-      <th>Category Name</th>
-      <th>Create Date</th>
-      <th>Last Update Date</th>
+      <th>Address</th>
+      <th>Phone</th>
+      <th>Email</th>
+      <th>Map Url</th>
       <th>Options</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let blog of blogs; let i = index">
-      <td>{{ i + 1 }}</td>
-      <td><img src="{{ blog.coverImage }}" style="width: 100px; height: auto" /></td>
-      <td>{{ blog.title }}</td>
-      <td>{{ blog.category.categoryName }}</td>
-      <td>{{ blog.createdAt | date }}</td>
-      <!--  Date Pipe -->
-      <td>
-        {{
-          blog.updatedAt && blog.updatedAt !== '0001-01-01T00:00:00'
-            ? (blog.updatedAt | date : 'medium')
-            : 'Not updated yet'
-        }}
-      </td>
+    <tr *ngFor="let item of contactInfos; let i = index">
+      <th>{{ i + 1 }}</th>
+      <th>{{ item.address }}</th>
+      <th>{{ item.phone }}</th>
+      <th>{{ item.email }}</th>
+      <th>{{ item.mapUrl | slice:0:22}}...</th>
       <td style="display: flex; gap: 10px">
-        <button class="btn btn-outline-danger"  (click)="delete(blog.id)"><i class="fa fa-trash"></i></button>
+        <button class="btn btn-outline-danger" (click)="delete(item.id)">
+          <i class="fa fa-trash"></i>
+        </button>
         <button
           class="btn btn-outline-info"
           data-bs-toggle="modal"
-          data-bs-target="#editModal"
-          (click)="onSelected(blog)"
+          data-bs-target="#updateModal"
+          (click)="onSelected(item)"
         >
           <i class="fa fa-edit"></i>
         </button>
@@ -45,7 +36,7 @@
   <i class="fa fa-plus"></i> Add new
 </button>
 
-<!--Create Modal -->
+<!-- Create Modal -->
 <div
   class="modal fade"
   id="createModal"
@@ -54,10 +45,10 @@
   aria-hidden="true"
 >
   <div class="modal-dialog">
-    <form #createForm="ngForm" (ngSubmit)="createBlog(); createForm.resetForm()">
+    <form #createForm="ngForm" (ngSubmit)="create(); createForm.resetForm()">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="createModalLabel">Add new Blog</h1>
+          <h1 class="modal-title fs-5" id="createModalLabel">Add new Contact Info</h1>
           <button
             type="button"
             class="btn-close"
@@ -67,19 +58,19 @@
         </div>
         <div class="modal-body">
           <div class="form-group">
-            <label for="">Blog Title</label>
+            <label for="">Address</label>
             <input
               required=""
               type="text"
               class="form-control"
-              placeholder="Write Title"
-              name="title"
-              [(ngModel)]="newBlog.title"
+              placeholder="Write Address"
+              name="address"
+              [(ngModel)]="newContactInfo.address"
             />
             <div *ngIf="errors.length > 0">
               <div *ngFor="let errorObj of errors">
                 <div *ngFor="let entry of errorObj | keyvalue">
-                  <div *ngIf="entry.key === 'Title'">
+                  <div *ngIf="entry.key === 'Address'">
                     <span class="text-danger">{{ entry.value }}</span>
                   </div>
                 </div>
@@ -87,19 +78,19 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="">Cover Image</label>
+            <label for="">Phone</label>
             <input
               required=""
               type="text"
               class="form-control"
-              placeholder="Write Cover Image"
-              name="coverImage"
-              [(ngModel)]="newBlog.coverImage"
+              placeholder="Write Phone"
+              name="phone"
+              [(ngModel)]="newContactInfo.phone"
             />
             <div *ngIf="errors.length > 0">
               <div *ngFor="let errorObj of errors">
                 <div *ngFor="let entry of errorObj | keyvalue">
-                  <div *ngIf="entry.key === 'CoverImage'">
+                  <div *ngIf="entry.key === 'Phone'">
                     <span class="text-danger">{{ entry.value }}</span>
                   </div>
                 </div>
@@ -107,19 +98,19 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="">Blog Image</label>
+            <label for="">Email</label>
             <input
               required=""
               type="text"
               class="form-control"
-              placeholder="Write Blog Image"
-              name="blogImage"
-              [(ngModel)]="newBlog.blogImage"
+              placeholder="Write Email"
+              name="email"
+              [(ngModel)]="newContactInfo.email"
             />
             <div *ngIf="errors.length > 0">
               <div *ngFor="let errorObj of errors">
                 <div *ngFor="let entry of errorObj | keyvalue">
-                  <div *ngIf="entry.key === 'BlogImage'">
+                  <div *ngIf="entry.key === 'Email'">
                     <span class="text-danger">{{ entry.value }}</span>
                   </div>
                 </div>
@@ -127,44 +118,19 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="">Description</label>
-            <textarea
+            <label for="">Map Url</label>
+            <input
               required=""
               type="text"
               class="form-control"
-              placeholder="Write Description"
-              name="description"
-              [(ngModel)]="newBlog.description"
-            ></textarea>
-
+              placeholder="Write Map Url"
+              name="mapUrl"
+              [(ngModel)]="newContactInfo.mapUrl"
+            />
             <div *ngIf="errors.length > 0">
               <div *ngFor="let errorObj of errors">
                 <div *ngFor="let entry of errorObj | keyvalue">
-                  <div *ngIf="entry.key === 'Description'">
-                    <span class="text-danger">{{ entry.value }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="form-group">
-            <label for="">Category Name</label>
-            <select
-              name="categoryId"
-              class="form-control"
-              [(ngModel)]="newBlog.categoryId"
-              required=""
-            >
-              <option *ngFor="let category of categories" value="{{ category.id }}">
-                {{ category.categoryName }}
-              </option>
-            </select>
-            <div *ngIf="errors.length > 0">
-              <div *ngFor="let errorObj of errors">
-                <div *ngFor="let entry of errorObj | keyvalue">
-                  <div *ngIf="entry.key === 'CategoryId'">
+                  <div *ngIf="entry.key === 'MapUrl'">
                     <span class="text-danger">{{ entry.value }}</span>
                   </div>
                 </div>
@@ -176,7 +142,12 @@
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             <i class="fa fa-times"></i> Close
           </button>
-          <button type="button" type="submit" class="btn btn-primary">
+          <button
+            type="button"
+            [disabled]="createForm.invalid"
+            type="submit"
+            class="btn btn-primary"
+          >
             <i class="fa fa-save"></i> Save changes
           </button>
         </div>
@@ -186,21 +157,19 @@
 </div>
 <!--Create Modal -->
 
-
-
-<!--Update Modal -->
+<!-- Update Modal -->
 <div
   class="modal fade"
-  id="editModal"
+  id="updateModal"
   tabindex="-1"
-  aria-labelledby="editModalLabel"
+  aria-labelledby="updateModalLabel"
   aria-hidden="true"
 >
   <div class="modal-dialog">
-    <form #editForm="ngForm" (ngSubmit)="update();">
+    <form #updateForm="ngForm" (ngSubmit)="update()">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="editModalLabel">Add new Blog</h1>
+          <h1 class="modal-title fs-5" id="updateModalLabel">Update Contact Info</h1>
           <button
             type="button"
             class="btn-close"
@@ -209,20 +178,20 @@
           ></button>
         </div>
         <div class="modal-body">
-          <div class="form-group">
-            <label for="">Blog Title</label>
+           <div class="form-group">
+            <label for="">Address</label>
             <input
               required=""
               type="text"
               class="form-control"
-              placeholder="Write Title"
-              name="title"
-              [(ngModel)]="editBlog.title"
+              placeholder="Write Address"
+              name="address"
+              [(ngModel)]="editContactInfo.address"
             />
             <div *ngIf="errors.length > 0">
               <div *ngFor="let errorObj of errors">
                 <div *ngFor="let entry of errorObj | keyvalue">
-                  <div *ngIf="entry.key === 'Title'">
+                  <div *ngIf="entry.key === 'Address'">
                     <span class="text-danger">{{ entry.value }}</span>
                   </div>
                 </div>
@@ -230,19 +199,19 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="">Cover Image</label>
+            <label for="">Phone</label>
             <input
               required=""
               type="text"
               class="form-control"
-              placeholder="Write Cover Image"
-              name="coverImage"
-              [(ngModel)]="editBlog.coverImage"
+              placeholder="Write Phone"
+              name="phone"
+              [(ngModel)]="editContactInfo.phone"
             />
             <div *ngIf="errors.length > 0">
               <div *ngFor="let errorObj of errors">
                 <div *ngFor="let entry of errorObj | keyvalue">
-                  <div *ngIf="entry.key === 'CoverImage'">
+                  <div *ngIf="entry.key === 'Phone'">
                     <span class="text-danger">{{ entry.value }}</span>
                   </div>
                 </div>
@@ -250,19 +219,19 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="">Blog Image</label>
+            <label for="">Email</label>
             <input
               required=""
               type="text"
               class="form-control"
-              placeholder="Write Blog Image"
-              name="blogImage"
-              [(ngModel)]="editBlog.blogImage"
+              placeholder="Write Email"
+              name="email"
+              [(ngModel)]="editContactInfo.email"
             />
             <div *ngIf="errors.length > 0">
               <div *ngFor="let errorObj of errors">
                 <div *ngFor="let entry of errorObj | keyvalue">
-                  <div *ngIf="entry.key === 'BlogImage'">
+                  <div *ngIf="entry.key === 'Email'">
                     <span class="text-danger">{{ entry.value }}</span>
                   </div>
                 </div>
@@ -270,44 +239,19 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="">Description</label>
-            <textarea
+            <label for="">Map Url</label>
+            <input
               required=""
               type="text"
               class="form-control"
-              placeholder="Write Description"
-              name="description"
-              [(ngModel)]="editBlog.description"
-            ></textarea>
-
+              placeholder="Write Map Url"
+              name="mapUrl"
+              [(ngModel)]="editContactInfo.mapUrl"
+            />
             <div *ngIf="errors.length > 0">
               <div *ngFor="let errorObj of errors">
                 <div *ngFor="let entry of errorObj | keyvalue">
-                  <div *ngIf="entry.key === 'Description'">
-                    <span class="text-danger">{{ entry.value }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-
-          <div class="form-group">
-            <label for="">Category Name</label>
-            <select
-              name="categoryId"
-              class="form-control"
-              [(ngModel)]="editBlog.categoryId"
-              required=""
-            >
-              <option *ngFor="let category of categories" value="{{ category.id }}">
-                {{ category.categoryName }}
-              </option>
-            </select>
-            <div *ngIf="errors.length > 0">
-              <div *ngFor="let errorObj of errors">
-                <div *ngFor="let entry of errorObj | keyvalue">
-                  <div *ngIf="entry.key === 'CategoryId'">
+                  <div *ngIf="entry.key === 'MapUrl'">
                     <span class="text-danger">{{ entry.value }}</span>
                   </div>
                 </div>
@@ -319,7 +263,12 @@
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
             <i class="fa fa-times"></i> Close
           </button>
-          <button type="button" type="submit" class="btn btn-primary">
+          <button
+            type="button"
+            [disabled]="updateForm.invalid || !updateForm.dirty"
+            type="submit"
+            class="btn btn-primary"
+          >
             <i class="fa fa-save"></i> Save changes
           </button>
         </div>
@@ -327,6 +276,4 @@
     </form>
   </div>
 </div>
-<!--Create Modal -->
-
-
+<!--Update Modal -->

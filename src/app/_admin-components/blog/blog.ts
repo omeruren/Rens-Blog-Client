@@ -45,8 +45,8 @@ export class Blog implements OnInit {
 
   createBlog() {
     this.errors = {};
-    let decodedToken = this.authService.decodeToken();
-    this.newBlog.userId = decodedToken.sub;
+
+    this.newBlog.userId = this.authService.getUserId();
 
     this.blogService.create(this.newBlog).subscribe({
       next: (result) => this.blogs.push(result.data),

@@ -35,4 +35,13 @@ this.router.navigate([""]);
     const token = localStorage.getItem('token');
     return !this.jwtHelper.isTokenExpired(token);
   }
+
+  getUserId(){
+    let decodedToken =  this.decodeToken();
+    return decodedToken.sub;
+  }
+  getUserName(){
+    let decodedToken =  this.decodeToken();
+    return decodedToken.name;
+  }
 }

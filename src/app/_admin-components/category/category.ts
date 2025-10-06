@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../../_services/category-service';
 import { CategoryDto } from '../../_models/category';
 import { SweetalertService } from '../../_services/sweetalert-service';
@@ -11,13 +11,19 @@ declare const bootstrap: any;
   templateUrl: './category.html',
   styleUrl: './category.css',
 })
-export class Category {
+export class Category implements OnInit {
   /**
    *
    */
   constructor(private categoryService: CategoryService, private swal:SweetalertService ) {
+  }
+
+
+  ngOnInit(): void {
     this.getCategories();
   }
+
+
 
   categories: CategoryDto[];
   newCategory: CategoryDto = new CategoryDto();
