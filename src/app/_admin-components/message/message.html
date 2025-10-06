@@ -1,0 +1,186 @@
+<!-- <table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Subject</th>
+      <th>Date</th>
+      <th>State</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of messages; let i = index">
+      <th>{{ i + 1 }}</th>
+      <th>{{ item.name }}</th>
+      <th>{{ item.email }}</th>
+      <th>{{ item.subject }}</th>
+      <th>{{ item.createdAt | date }}</th>
+
+      @if (item.isRead) {
+        <th>Seen</th>
+
+      }
+      @else{
+        <th>Not Seen</th>
+      }
+      <td style="display: flex; gap: 10px">
+        <button class="btn btn-outline-danger" (click)="delete(item.id)">
+          <i class="fa fa-trash"></i>
+        </button>
+        <button
+          class="btn btn-outline-info"
+          data-bs-toggle="modal"
+          data-bs-target="#updateModal"
+          (click)="onSelected(item)"
+        >
+          <i class="fa fa-comments"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table> -->
+<!-- Update Modal -->
+<div
+  class="modal fade"
+  id="updateModal"
+  tabindex="-1"
+  aria-labelledby="updateModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <form #updateForm="ngForm" (ngSubmit)="update()">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="updateModalLabel">Show Contact Info</h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Name :</th>
+                <td>{{ editMessage.name }}</td>
+              </tr>
+              <tr>
+                <th>Email :</th>
+                <td>{{ editMessage.email }}</td>
+              </tr>
+              <tr>
+                <th>Subject :</th>
+                <td>{{ editMessage.subject }}</td>
+              </tr>
+              <tr>
+                <th>Message :</th>
+                <td>{{ editMessage.messageBody }}</td>
+              </tr>
+            </thead>
+          </table>
+          <button class="btn btn-outline-primary" data-bs-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
+<!--Update Modal -->
+
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Unseen Messages</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Seen Messages</button>
+  </li>
+
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Subject</th>
+      <th>Date</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of unseenMessages; let i = index">
+      <th>{{ i + 1 }}</th>
+      <th>{{ item.name }}</th>
+      <th>{{ item.email }}</th>
+      <th>{{ item.subject }}</th>
+      <th>{{ item.createdAt | date }}</th>
+
+
+      <td style="display: flex; gap: 10px">
+        <button class="btn btn-outline-danger" (click)="delete(item.id)">
+          <i class="fa fa-trash"></i>
+        </button>
+        <button
+          class="btn btn-outline-info"
+          data-bs-toggle="modal"
+          data-bs-target="#updateModal"
+          (click)="onSelected(item)"
+        >
+          <i class="fa fa-comments"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+  </div>
+
+
+  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Subject</th>
+      <th>Date</th>
+      <th>Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of seenMessages; let i = index">
+      <th>{{ i + 1 }}</th>
+      <th>{{ item.name }}</th>
+      <th>{{ item.email }}</th>
+      <th>{{ item.subject }}</th>
+      <th>{{ item.createdAt | date }}</th>
+
+
+      <td style="display: flex; gap: 10px">
+        <button class="btn btn-outline-danger" (click)="delete(item.id)">
+          <i class="fa fa-trash"></i>
+        </button>
+        <button
+          class="btn btn-outline-info"
+          data-bs-toggle="modal"
+          data-bs-target="#updateModal"
+          (click)="onSelected(item)"
+        >
+          <i class="fa fa-comments"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+  </div>
+ </div>

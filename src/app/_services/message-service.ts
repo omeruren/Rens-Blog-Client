@@ -17,6 +17,12 @@ export class MessageService {
     getAll() {
       return this.http.get<Result<MessageDto[]>>(this.baseUrl);
     }
+    getSeen() {
+      return this.http.get<Result<MessageDto[]>>(this.baseUrl+"read");
+    }
+    getUnseen() {
+      return this.http.get<Result<MessageDto[]>>(this.baseUrl+"unread");
+    }
 
     getById(id: string) {
       return this.http.get<Result<MessageDto>>(this.baseUrl + id);

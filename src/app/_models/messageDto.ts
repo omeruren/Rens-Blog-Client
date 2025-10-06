@@ -4,5 +4,6 @@ export class MessageDto{
   email;
   subject;
   messageBody;
+  createdAt;
   isRead: boolean;
 }
