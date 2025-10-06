@@ -20,6 +20,7 @@ import { AuthGuard } from './_guards/auth-guard';
 import { TokenInterceptor } from './_interceptors/token-interceptor';
 import { Message } from './_admin-components/message/message';
 import { Social } from './_admin-components/social/social';
+import { SubComment } from './_admin-components/sub-comment/sub-comment';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { Social } from './_admin-components/social/social';
     ContactInfo,
     Message,
     Social,
+    SubComment,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [

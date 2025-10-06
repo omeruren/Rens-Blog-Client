@@ -13,6 +13,7 @@ import { Comment } from './_admin-components/comment/comment';
 import { ContactInfo } from './_admin-components/contact-info/contact-info';
 import { Message } from './_admin-components/message/message';
 import { Social } from './_admin-components/social/social';
+import { SubComment } from './_admin-components/sub-comment/sub-comment';
 
 const routes: Routes = [
   //Main Routes
@@ -74,6 +75,11 @@ const routes: Routes = [
       {
         path: 'social',
         component: Social,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'subcomment',
+        component: SubComment,
         canActivate: [AuthGuard],
       },
     ],
